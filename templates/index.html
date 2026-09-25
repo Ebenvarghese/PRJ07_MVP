@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRJ-07 MVP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="top">
+            <span class="badge">PRJ-07</span>
+            <span class="badge right">Entity Resolution</span>
+        </div>
+
+        <h1>Multi-Database Entity Resolution & Unified Data Repository</h1>
+
+        <p>
+            Import multiple datasets, normalize fields, match records,
+            and build a unified master repository.
+        </p>
+
+        <hr>
+
+        <a href="/import">
+    <button>Import Demo Data</button>
+</a>
+
+        <form action="/search" method="GET" class="search-box">
+
+    <input
+        type="text"
+        name="query"
+        placeholder="Search email, phone or username"
+        required>
+
+    <button type="submit">Search</button>
+
+</form>
+
+        <div class="stats-card">
+    <h3>Processing Statistics</h3>
+
+    <div class="stats-grid">
+        <div class="stat-box">
+            <span class="number">{{ total_records }}</span>
+            <span class="label">Records</span>
+        </div>
+
+        <div class="stat-box">
+            <span class="number">{{ total_sources }}</span>
+            <span class="label">Datasets</span>
+        </div>
+    </div>
+</div>
+        {% if result %}
+
+<hr>
+
+<h2>Master Entity</h2>
+
+<p><strong>Name:</strong> {{ result.name }}</p>
+<p><strong>Email:</strong> {{ result.email }}</p>
+<p><strong>Phone:</strong> {{ result.phone }}</p>
+<p><strong>Username:</strong> {{ result.username }}</p>
+<p><strong>Member ID:</strong> {{ result.member_id }}</p>
+<p><strong>Company:</strong> {{ result.company }}</p>
+<p><strong>Address:</strong> {{ result.address }}</p>
+
+<h3>Matched Sources</h3>
+
+<ul>
+    {% for source in result.sources %}
+    <li>{{ source }}</li>
+    {% endfor %}
+</ul>
+
+{% endif %}
+{% if searched and not result %}
+
+<hr>
+
+<div class="no-result">
+    <h3>No Entity Found</h3>
+    <p>No matching record exists in the unified repository.</p>
+</div>
+
+{% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

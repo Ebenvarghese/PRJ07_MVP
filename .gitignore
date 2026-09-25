@@ -1,0 +1,5 @@
+.venv/
+entity_repo.db
+__pycache__/
+*.pyc
+.vscode/
