@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for
 import sqlite3
 import pandas as pd
+import os
 
 app = Flask(__name__)
 
@@ -252,4 +253,4 @@ def search():
 # -----------------------------
 if __name__ == "__main__":
     init_db()
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
